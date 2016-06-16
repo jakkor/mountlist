@@ -12,6 +12,12 @@ describe('Unit - Os/Win32.js test', function() {
 
     assert.equal(lineObject.local, 'E:');
     assert.equal(lineObject.res, '\\\\vboxsrv\\someOtherFolder');
+
+
+    var line = 'OK           Z:        \\\\192.168.97.82\\tickets_1  Microsoft Windows Network';
+    var lineObject = Win32.getObjectFromLine(line);
+    assert.equal(lineObject.local, 'Z:');
+    assert.equal(lineObject.res, '\\\\192.168.97.82\\tickets_1');
   });
 
 });

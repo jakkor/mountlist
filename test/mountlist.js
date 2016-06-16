@@ -21,15 +21,21 @@ describe('Main tests', function() {
   it('Should get proper list from Windows net use command', function() {
     var message = 'Status  Local   Remote              Network' + "\n" +
               '--------------------------------------------' + "\n" +
-              "     E:     \\\\vboxsrv\\someFolder     VirtualBox Shared Folders" + "\n" +
+              '     E:     \\\\vboxsrv\\someFolder     VirtualBox Shared Folders' + "\n" +
               '     F:     \\\\vboxsrv\\someOtherFolder    VirtualBox Shared Folders' + "\n" +
+              'OK           Y:        \\\\192.168.97.82\\mfh-ingest_1     Microsoft Windows Network' + "\n" +
+              'OK           Z:        \\\\192.168.97.82\\tickets_1 Microsoft Windows Network' + "\n" +
+              'OK                     \\\\192.168.97.82\\es_objects$   Microsoft Windows Network' + "\n" +
+              '      Y:        \\\\ABC-192.168.97.95\\something_1      Virtual Network' + "\n" +
               'this command completed successfully.';
     var os = MountList.osMountFactory('win32');
     var returnObject = os.getObjectFromReturnString(message);
 
-    assert.equal(returnObject.length, 2, "Should see two object");
+    assert.equal(returnObject.length, 5, "Should see two object");
     assert.equal(returnObject[0].local, 'E:');
     assert.equal(returnObject[1].local, 'F:');
+    assert.equal(returnObject[4].local, 'Y:');
+    assert.equal(returnObject[4].res, '\\\\ABC-192.168.97.95\\something_1');
     assert.equal(returnObject[1].res, '\\\\vboxsrv\\someOtherFolder');
   });
 

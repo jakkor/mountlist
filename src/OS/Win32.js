@@ -14,17 +14,17 @@ Win32.prototype.constructor = Win32;
  * @return {Object}
  */
 Win32.prototype.getObjectFromLine = function(line) {
-  var regexpMatches = line.match('^\\s{2,}([A-Z]{1}[:]{1})\\s{2,}(.*)\\s{2,}(.*)$');
+  var regexpMatches = line.match('^(\\s{2,}|OK\\s{2,})([A-Z]{1}[:]{1})\\s{2,}(.*)\\s{2,}(.*)$');
   var lineObject = {};
   if (!regexpMatches || regexpMatches.length <= 1) {
     return false;
   }
-  if (regexpMatches[1]) {
-    lineObject.local = regexpMatches[1].trim();
+  if (regexpMatches[2]) {
+    lineObject.local = regexpMatches[2].trim();
   }
 
-  if (regexpMatches[2]) {
-    lineObject.res = regexpMatches[2].trim();
+  if (regexpMatches[3]) {
+    lineObject.res = regexpMatches[3].trim();
   }
 
   return lineObject;
