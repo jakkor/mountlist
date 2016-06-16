@@ -1,7 +1,7 @@
 {
   "name": "mountlist",
   "version": "0.0.1",
-  "description": "Creates a list of mounted drives. For now on windows it's only remote drives.",
+  "description": "Returns a list of mounted drives. For now on windows it's only remote drives.",
   "main": "mountlist.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"

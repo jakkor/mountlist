@@ -30,10 +30,4 @@ MountList.prototype.osMountFactory = function(platform) {
   return factory.getObject();
 }
 
-//module.exports=new MountList();
-
-var ml = new MountList();
-ml.getList()
-.then(function(list){
-  console.log(list);
-})
+module.exports=new MountList();
