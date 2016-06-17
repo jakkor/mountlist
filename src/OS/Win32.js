@@ -14,24 +14,24 @@ Win32.prototype.constructor = Win32;
  * @return {Object}
  */
 Win32.prototype.getObjectFromLine = function(line) {
-  var regexpMatches = line.match('^(\\s{2,}|OK\\s{2,})([A-Z]{1}[:]{1})\\s{2,}(.*)\\s{2,}(.*)$');
+  var regexpMatches = line.match('^([A-Z]{1}[:]{1})\s{0,}(.*)$');
   var lineObject = {};
   if (!regexpMatches || regexpMatches.length <= 1) {
     return false;
   }
-  if (regexpMatches[2]) {
-    lineObject.local = regexpMatches[2].trim();
+  if (regexpMatches[1]) {
+    lineObject.local = regexpMatches[1].trim();
   }
 
-  if (regexpMatches[3]) {
-    lineObject.res = regexpMatches[3].trim();
+  if (regexpMatches[2]) {
+    lineObject.res = regexpMatches[2].trim();
   }
 
   return lineObject;
 }
 
 Win32.prototype.executeCommand = function() {
-  return this.getCommandPromise('net use');
+  return this.getCommandPromise('wmic logicaldisk get DeviceId, ProviderName');
 }
 
 module.exports=Win32

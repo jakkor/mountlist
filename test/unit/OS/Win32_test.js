@@ -7,32 +7,17 @@ var assert = require('chai').assert,
 describe('Unit - Os/Win32.js test', function() {
 
   it('Should parse correctly line from net use windows command', function() {
-    var line = '      E:      \\\\vboxsrv\\someOtherFolder      VirtualBox Shared Folders';
+    var line = 'M:        \\\\192.168.1.10\\bar2 bar3 bar4';
     var lineObject = Win32.getObjectFromLine(line);
 
-    assert.equal(lineObject.local, 'E:');
-    assert.equal(lineObject.res, '\\\\vboxsrv\\someOtherFolder');
+    assert.equal(lineObject.local, 'M:');
+    assert.equal(lineObject.res, '\\\\192.168.1.10\\bar2 bar3 bar4');
 
 
-    var line = 'OK           Z:        \\\\192.168.97.82\\tickets_1  Microsoft Windows Network';
+    var line = 'T:        \\\\192.168.1.10\\foo';
     var lineObject = Win32.getObjectFromLine(line);
-    assert.equal(lineObject.local, 'Z:');
-    assert.equal(lineObject.res, '\\\\192.168.97.82\\tickets_1');
+    assert.equal(lineObject.local, 'T:');
+    assert.equal(lineObject.res, '\\\\192.168.1.10\\foo');
   });
 
 });
-
-
-/*
-
-New connections will be remembered.
-
-
-Status       Local     Remote                    Network
-
--------------------------------------------------------------------------------
-             E:        \\vboxsrv\editor          VirtualBox Shared Folders
-The command completed successfully.
-
-
- */

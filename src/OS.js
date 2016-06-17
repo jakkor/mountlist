@@ -15,7 +15,7 @@ OS.prototype.setOsName = function(name) {
 
 OS.prototype.getObjectFromReturnString = function(returnString) {
   var newObject = [];
-  var lines = returnString.split(/\r?\n/);
+  var lines = returnString.split(/\r|\n/);
   lines.forEach(function(line) {
     var lineObject = this.getObjectFromLine(line);
     if (lineObject) {
@@ -26,7 +26,6 @@ OS.prototype.getObjectFromReturnString = function(returnString) {
 }
 
 OS.prototype.getCommandPromise = function(commandToRun) {
-  console.log("Get command promise", commandToRun);
   return new Promise(function(resolve, reject){
     var child = exec(commandToRun);
     var result = "";
@@ -37,7 +36,7 @@ OS.prototype.getCommandPromise = function(commandToRun) {
     });
 
     child.on('close', function() {
-        resolve(result);
+      resolve(result);
     });
   });
 }

@@ -18,25 +18,31 @@ describe('Main tests', function() {
     assert.equal(os.getOsName(), 'win32');
   });
 
-  it('Should get proper list from Windows net use command', function() {
-    var message = 'Status  Local   Remote              Network' + "\n" +
-              '--------------------------------------------' + "\n" +
-              '     E:     \\\\vboxsrv\\someFolder     VirtualBox Shared Folders' + "\n" +
-              '     F:     \\\\vboxsrv\\someOtherFolder    VirtualBox Shared Folders' + "\n" +
-              'OK           Y:        \\\\192.168.97.82\\mfh-ingest_1     Microsoft Windows Network' + "\n" +
-              'OK           Z:        \\\\192.168.97.82\\tickets_1 Microsoft Windows Network' + "\n" +
-              'OK                     \\\\192.168.97.82\\es_objects$   Microsoft Windows Network' + "\n" +
-              '      Y:        \\\\ABC-192.168.97.95\\something_1      Virtual Network' + "\n" +
-              'this command completed successfully.';
+  it('Should get proper list from Windows wmic command', function() {
+    var message = 'DeviceID  ProviderName' + "\n" +
+                  'C:' + "\n" +
+                  'D:' + "\n" +
+                  'E:        \\\\someServer\\name' + "\n" +
+                  'F:        \\\\192.168.1.10\\bar' + "\n" +
+                  'M:        \\\\192.168.1.10\\bar2 bar3 bar4' + "\n" +
+                  'T:        \\\\192.168.1.10\\foo' + "\n" +
+                  'V:        \\\\192.168.1.11\\foo2' + "\n" +
+                  '' + "\n" +
+                  '';
+
     var os = MountList.osMountFactory('win32');
     var returnObject = os.getObjectFromReturnString(message);
 
-    assert.equal(returnObject.length, 5, "Should see two object");
-    assert.equal(returnObject[0].local, 'E:');
-    assert.equal(returnObject[1].local, 'F:');
-    assert.equal(returnObject[4].local, 'Y:');
-    assert.equal(returnObject[4].res, '\\\\ABC-192.168.97.95\\something_1');
-    assert.equal(returnObject[1].res, '\\\\vboxsrv\\someOtherFolder');
+    assert.equal(returnObject.length, 7, "Should see 7 objects");
+    assert.equal(returnObject[0].local, 'C:');
+    assert.equal(returnObject[1].local, 'D:');
+    assert.equal(!returnObject[1].res, true, "Should not see resource for this line");
+    assert.equal(returnObject[2].local, 'E:');
+    assert.equal(returnObject[2].res, '\\\\someServer\\name');
+    assert.equal(returnObject[3].local, 'F:');
+    assert.equal(returnObject[3].res, '\\\\192.168.1.10\\bar');
+    assert.equal(returnObject[4].local, 'M:');
+    assert.equal(returnObject[4].res, '\\\\192.168.1.10\\bar2 bar3 bar4');
   });
 
   it('Should get proper list from OSX mount command', function() {
