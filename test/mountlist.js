@@ -1,3 +1,5 @@
+/* jshint node: true */
+
 'use strict';
 
 var assert = require('chai').assert,
@@ -6,7 +8,7 @@ var assert = require('chai').assert,
 describe('Main tests', function() {
   it('Should detect operating system correctly and create correct os object', function() {
     var os = MountList.osMountFactory(process.platform);
-    assert.equal(typeof os, 'object', "Should Return os object")
+    assert.equal(typeof os, 'object', "Should Return os object");
 
     os = MountList.osMountFactory('linux');
     assert.equal(os.getOsName(), 'linux');

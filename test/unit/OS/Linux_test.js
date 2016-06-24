@@ -1,3 +1,6 @@
+/* jshint node: true */
+/*global describe, it */
+
 'use strict';
 var assert = require('chai').assert,
     LinuxClass = require('../../../src/OS/Linux.js'),
@@ -12,6 +15,7 @@ describe('Unit - Os/Linux.js test', function() {
 
     assert.equal(lineObject.local, '/RAIDS/RAID_1');
     assert.equal(lineObject.res, '/dev/sda1');
+    assert.equal(lineObject.separator, '/');
   });
 
 });

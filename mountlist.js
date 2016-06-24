@@ -3,7 +3,7 @@ var OSFactory = require('./src/OS.js').OSFactory;
 
 var MountList = function() {
 
-}
+};
 
 /**
  * Get the list of objects with mount data like.
@@ -28,6 +28,6 @@ MountList.prototype.getList = function() {
 MountList.prototype.osMountFactory = function(platform) {
   var factory = new OSFactory(platform);
   return factory.getObject();
-}
+};
 
 module.exports=new MountList();

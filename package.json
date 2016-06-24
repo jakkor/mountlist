@@ -1,6 +1,6 @@
 {
   "name": "mountlist",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Returns a list of mounted drives. For now on windows it's only remote drives.",
   "main": "mountlist.js",
   "scripts": {
@@ -10,6 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
     "mocha": "^2.5.3"
   }
 }

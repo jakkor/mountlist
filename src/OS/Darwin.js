@@ -1,4 +1,7 @@
 'use strict';
+
+/* jshint node: true */
+
 var OS = require('../OS.js').OS;
 
 function Darwin() {
@@ -29,8 +32,10 @@ Darwin.prototype.getObjectFromLine = function(line) {
     lineObject.local = regexpMatches[2];
   }
 
+  lineObject.separator = "/";
+
   return lineObject;
-}
+};
 
 /**
  * Execute and parse the command necessary to get the mounting data.
@@ -39,6 +44,6 @@ Darwin.prototype.getObjectFromLine = function(line) {
  */
 Darwin.prototype.executeCommand = function() {
   return this.getCommandPromise('mount');
-}
+};
 
 module.exports = Darwin;

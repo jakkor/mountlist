@@ -1,4 +1,7 @@
 'use strict';
+
+/* jshint node: true */
+
 var OS = require('../OS.js').OS;
 
 function Win32() {
@@ -27,11 +30,18 @@ Win32.prototype.getObjectFromLine = function(line) {
     lineObject.res = regexpMatches[2].trim();
   }
 
-  return lineObject;
-}
+  lineObject.separator = "\\";
 
+  return lineObject;
+};
+
+/**
+ * Execute and parse the command necessary to get the mounting data.
+ * Returns a promise because we need to wait for the command to finish before moving on.
+ * @return {Promise}
+ */
 Win32.prototype.executeCommand = function() {
   return this.getCommandPromise('wmic logicaldisk get DeviceId, ProviderName');
-}
+};
 
-module.exports=Win32
+module.exports=Win32;

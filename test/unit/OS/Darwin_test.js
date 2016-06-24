@@ -1,3 +1,6 @@
+/* jshint node: true */
+/*global describe, it */
+
 'use strict';
 var assert = require('chai').assert,
     DarwinClass = require('../../../src/OS/Darwin.js'),
@@ -12,6 +15,7 @@ describe('Unit - Os/Darwin.js test', function() {
 
     assert.equal(lineObject.local, '/dev');
     assert.equal(lineObject.res, 'devfs');
+    assert.equal(lineObject.separator, '/');
   });
 
 });

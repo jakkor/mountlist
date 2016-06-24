@@ -1,17 +1,20 @@
 'use strict';
+
+/* jshint node: true */
+
 var exec = require('child_process').exec;
 
 var OS = function() {
 
-}
+};
 
 OS.prototype.getOsName = function() {
     return this.osName;
-}
+};
 
 OS.prototype.setOsName = function(name) {
-    return this.osName = name;
-}
+  this.osName = name;
+};
 
 OS.prototype.getObjectFromReturnString = function(returnString) {
   var newObject = [];
@@ -23,7 +26,7 @@ OS.prototype.getObjectFromReturnString = function(returnString) {
     }
   }.bind(this));
   return newObject;
-}
+};
 
 OS.prototype.getCommandPromise = function(commandToRun) {
   return new Promise(function(resolve, reject){
@@ -39,12 +42,12 @@ OS.prototype.getCommandPromise = function(commandToRun) {
       resolve(result);
     });
   });
-}
+};
 
 
 var OSFactory = function(platform) {
   this.platform = platform;
-}
+};
 
 OSFactory.prototype.getObject = function() {
   switch (this.platform) {
@@ -59,7 +62,7 @@ OSFactory.prototype.getObject = function() {
       return new Win32();
   }
   return false;
-}
+};
 
 module.exports.OS=OS;
 module.exports.OSFactory=OSFactory;

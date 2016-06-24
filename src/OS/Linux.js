@@ -1,9 +1,12 @@
 'use strict';
+
+/* jshint node: true */
+
 var OS = require('../OS.js').OS;
 
 var Linux = function() {
   this.osName = 'linux';
-}
+};
 
 Linux.prototype = new OS();
 Linux.prototype.constructor = Linux;
@@ -29,12 +32,19 @@ Linux.prototype.getObjectFromLine = function(line) {
     lineObject.local = regexpMatches[2];
   }
 
-  return lineObject;
-}
+  lineObject.separator = "/";
 
+  return lineObject;
+};
+
+/**
+ * Execute and parse the command necessary to get the mounting data.
+ * Returns a promise because we need to wait for the command to finish before moving on.
+ * @return {Promise}
+ */
 Linux.prototype.executeCommand = function() {
   return this.getCommandPromise('mount');
-}
+};
 
 
-module.exports=Linux
+module.exports=Linux;

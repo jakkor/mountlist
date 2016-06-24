@@ -1,3 +1,6 @@
+/* jshint node: true */
+/*global describe, it */
+
 'use strict';
 var assert = require('chai').assert,
     Win32Class = require('../../../src/OS/Win32.js'),
@@ -12,10 +15,11 @@ describe('Unit - Os/Win32.js test', function() {
 
     assert.equal(lineObject.local, 'M:');
     assert.equal(lineObject.res, '\\\\192.168.1.10\\bar2 bar3 bar4');
+    assert.equal(lineObject.separator, '\\');
 
 
-    var line = 'T:        \\\\192.168.1.10\\foo';
-    var lineObject = Win32.getObjectFromLine(line);
+    line = 'T:        \\\\192.168.1.10\\foo';
+    lineObject = Win32.getObjectFromLine(line);
     assert.equal(lineObject.local, 'T:');
     assert.equal(lineObject.res, '\\\\192.168.1.10\\foo');
   });
