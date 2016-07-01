@@ -1,6 +1,7 @@
 'use strict';
 
 /* jshint node: true */
+/* globals unescape */
 
 var OS = require('../OS.js').OS;
 
@@ -26,10 +27,10 @@ Linux.prototype.getObjectFromLine = function(line) {
   }
 
   if (regexpMatches[1]) {
-    lineObject.res = regexpMatches[1];
+    lineObject.res = unescape(regexpMatches[1]);
   }
   if (regexpMatches[2]) {
-    lineObject.local = regexpMatches[2];
+    lineObject.local = unescape(regexpMatches[2]);
   }
 
   lineObject.separator = "/";

@@ -1,6 +1,7 @@
 'use strict';
 
 /* jshint node: true */
+/* globals unescape */
 
 var OS = require('../OS.js').OS;
 
@@ -23,11 +24,11 @@ Win32.prototype.getObjectFromLine = function(line) {
     return false;
   }
   if (regexpMatches[1]) {
-    lineObject.local = regexpMatches[1].trim();
+    lineObject.local = unescape(regexpMatches[1].trim());
   }
 
   if (regexpMatches[2]) {
-    lineObject.res = regexpMatches[2].trim();
+    lineObject.res = unescape(regexpMatches[2].trim());
   }
 
   lineObject.separator = "\\";

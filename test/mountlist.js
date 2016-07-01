@@ -52,15 +52,19 @@ describe('Main tests', function() {
                   'devfs on /dev (devfs, local, nobrowse)' + "\n" +
                   'map -hosts on /net (autofs, nosuid, automounted, nobrowse)' + "\n" +
                   'map auto_home on /home (autofs, automounted, nobrowse)' + "\n" +
-                  '/dev/disk0s4 on /Volumes/BOOTCAMP (ntfs, local, read-only, noowners)';
+                  '/dev/disk0s4 on /Volumes/BOOTCAMP (ntfs, local, read-only, noowners)' + "\n" +
+                  '//user@192.168.1.100/Some%20Name on /Volumes/Some%20Name (smbfs, nodev, nosuid)';
 
     var os = MountList.osMountFactory('darwin');
     var returnObject = os.getObjectFromReturnString(message);
 
-    assert.equal(returnObject.length, 5, "Should see file object");
+    assert.equal(returnObject.length, 6, "Should see file object");
     assert.equal(returnObject[0].local, '/');
     assert.equal(returnObject[1].local, '/dev');
     assert.equal(returnObject[1].res, 'devfs');
+
+    assert.equal(returnObject[5].local, '/Volumes/Some Name');
+    assert.equal(returnObject[5].res, '//user@192.168.1.100/Some Name');
   });
 
   it('Should get proper list from Linux mount command', function() {
